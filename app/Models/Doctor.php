@@ -23,7 +23,7 @@ class Doctor extends Authenticatable
 
     public function specialization()
     {
-        return $this->hasOne(Specialization::class);
+        return $this->belongsTo(Specialization::class);
     }
 
     public function appointments()
