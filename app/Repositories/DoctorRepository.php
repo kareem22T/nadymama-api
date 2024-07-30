@@ -20,12 +20,12 @@ class DoctorRepository implements DoctorRepositoryInterface
 
     public function all()
     {
-        return $this->model->with('phones', 'specialization')->get();
+        return $this->model->with('phones', 'category')->get();
     }
 
     public function find($id)
     {
-        return $this->model->with('phones', 'specialization')->findOrFail($id);
+        return $this->model->with('phones', 'category')->findOrFail($id);
     }
 
     public function create(array $data)

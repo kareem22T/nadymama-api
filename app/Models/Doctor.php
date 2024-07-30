@@ -21,7 +21,7 @@ class Doctor extends Authenticatable
         return $this->hasMany(DoctorPhone::class);
     }
 
-    public function specialization()
+    public function category()
     {
         return $this->belongsTo(Specialization::class);
     }
