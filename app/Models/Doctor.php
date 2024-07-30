@@ -13,7 +13,7 @@ class Doctor extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'description', 'photo', 'specialization_id', 'degree', 'examination_price', 'special_examination_price', 'way_of_waiting', 'username', 'password'
+        'name', 'description', 'specialization', 'photo', 'specialization_id', 'degree', 'examination_price', 'special_examination_price', 'way_of_waiting', 'username', 'password'
     ];
 
     public function phones()
