@@ -21,6 +21,11 @@ class Doctor extends Authenticatable
         return $this->hasMany(DoctorPhone::class);
     }
 
+    public function specialization()
+    {
+        return $this->hasOne(Specialization::class);
+    }
+
     public function appointments()
     {
         return $this->hasMany(Appointment::class);

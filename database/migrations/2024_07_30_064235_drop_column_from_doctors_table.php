@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('doctors', function (Blueprint $table) {
-            $table->integer('specialization_id');
+            // Dropping the 'specialization' column
+            $table->dropColumn('specialization');
         });
     }
 
@@ -22,6 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('doctors', function (Blueprint $table) {
+            // Adding the 'specialization' column back
+            $table->string('specialization');
         });
     }
 };
