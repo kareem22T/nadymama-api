@@ -24,7 +24,7 @@ class StoreDoctorRequest extends FormRequest
             'password' => 'required',
             'description' => 'required|string',
             'photo' => 'nullable|image',
-            'specialization' => 'required|string|max:255',
+            'specialization_id' => 'required',
             'degree' => 'required|string|max:255',
             'examination_price' => 'required|numeric',
             'special_examination_price' => 'required|numeric',
