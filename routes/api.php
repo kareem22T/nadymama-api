@@ -31,6 +31,9 @@ Route::prefix('users')->group(function () {
 
     // get categories
     Route::get('categories', [SpecializationController::class, "index"]);
+
+    Route::get('/specializations/{id}/doctors', [SpecializationController::class, 'getDoctorsBySpecialization']);
+
     // get doctors
     Route::get('doctors', [DoctorController::class, "index"]);
 

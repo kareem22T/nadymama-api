@@ -10,7 +10,7 @@ class DoctorController extends Controller
 {
     public function index(Request $request)
     {
-        $doctors = Doctor::paginate(10); // You can adjust the number per page as needed
+        $doctors = Doctor::paginate(20); // You can adjust the number per page as needed
         return response()->json($doctors);
     }
 }
