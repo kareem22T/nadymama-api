@@ -13,4 +13,16 @@ class DoctorController extends Controller
         $doctors = Doctor::paginate(20); // You can adjust the number per page as needed
         return response()->json($doctors);
     }
+
+    public function doctor($doctorId)
+    {
+        $doctor = Doctor::find($doctorId);
+
+        if (!$doctor) {
+            return response()->json(['error' => 'Doctor not found'], 404);
+        }
+
+        return response()->json($doctor);
+    }
+
 }

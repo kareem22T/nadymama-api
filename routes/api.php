@@ -33,6 +33,7 @@ Route::prefix('users')->group(function () {
     Route::get('categories', [SpecializationController::class, "index"]);
 
     Route::get('/specializations/{id}/doctors', [SpecializationController::class, 'getDoctorsBySpecialization']);
+    Route::get('/doctor/{id}', [DoctorController::class, 'doctor']);
 
     // get doctors
     Route::get('doctors', [DoctorController::class, "index"]);
