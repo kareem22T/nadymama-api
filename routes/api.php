@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\User\AppointmentController;
 use App\Http\Controllers\User\AuthController;
+use App\Http\Controllers\User\DoctorController;
+use App\Http\Controllers\User\SpecializationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +28,10 @@ Route::prefix('users')->group(function () {
         ###########################################################
 
     });
+
+    // get categories
+    Route::get('categories', [SpecializationController::class, "index"]);
+    // get doctors
+    Route::get('doctors', [DoctorController::class, "index"]);
 
 });
