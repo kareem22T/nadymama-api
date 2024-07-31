@@ -16,7 +16,7 @@ class DoctorController extends Controller
 
     public function doctor($doctorId)
     {
-        $doctor = Doctor::find($doctorId);
+        $doctor = Doctor::with("phones")->find($doctorId);
 
         if (!$doctor) {
             return response()->json(['error' => 'Doctor not found'], 404);
