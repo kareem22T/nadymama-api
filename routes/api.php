@@ -41,5 +41,6 @@ Route::prefix('users')->group(function () {
 
     // get articles
     Route::get('articles', [ArticleController::class, "index"]);
+    Route::get('articles/{id}', [ArticleController::class, "article"]);
 
 });
