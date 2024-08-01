@@ -1,68 +1,55 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Traits\DataFormController;
-use App\Traits\SaveFileTrait;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use App\Models\Image;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 
 class ImagesController extends Controller
 {
-    use DataFormController;
-    use SaveFileTrait;
-
     public function uploadeImg(Request $request) {
         $validator = Validator::make($request->all(), [
-            'img' => ['required'],
+            'img' => ['required', 'image'], // Ensure the uploaded file is an image
         ], [
-            'img.required' => 'Please uploade an valid image',
+            'img.required' => 'Please upload a valid image',
         ]);
 
         if ($validator->fails()) {
-            return $this->jsondata(false,true,  'upload failed', [$validator->errors()->first()], []);
+            return $this->jsondata(false, true, 'Upload failed', [$validator->errors()->first()], []);
         }
 
-        $image = $this->saveFile($request->img, 'images/uploads/');
-        if ($image)
-            $upload_image = Image::create([
-                'path' => $image,
+        // Use the storePhoto method to save the image
+        $imagePath = $this->storePhoto($request->file('img'));
+        if ($imagePath) {
+            $uploadImage = Image::create([
+                'path' => $imagePath,
             ]);
 
-        if ($upload_image)
-            return $this->jsondata(true,true,  'Image have uploaded successfully', [], []);
+            if ($uploadImage) {
+                return $this->jsondata(true, true, 'Image has been uploaded successfully', [], []);
+            }
+        }
 
-
-        return $this->jsondata('false',true,  'uploade field', ['please uploade valid image'], []);
-
+        return $this->jsondata(false, true, 'Upload failed', ['Please upload a valid image'], []);
     }
 
     public function search(Request $request) {
-        $images = Image::where('path', 'like', '%' . $request->search_words . '%')->orderby('id', 'desc')
-                                ->paginate(10);
+        $images = Image::where('path', 'like', '%' . $request->search_words . '%')
+                       ->orderBy('id', 'desc')
+                       ->paginate(10);
 
-        return $this->jsonData(true, true, '', [], $images);
-
+        return $this->jsondata(true, true, '', [], $images);
     }
 
-
     public function getImages() {
+        $getImages = Image::orderBy('id', 'desc')->paginate(10);
 
-        $get_images = Image::orderby('id', 'desc')->paginate(10);
+        if ($getImages) {
+            return $this->jsondata(true, true, '', [], $getImages);
+        }
 
-        if ($get_images)
-            return $this->jsondata(true,true,  '', [], $get_images);
-
-
-        return $this->jsondata('false', true, 'there is no images yet field', ['please uploade images'], [],);
-
+        return $this->jsondata(false, true, 'There are no images yet', ['Please upload images'], []);
     }
 
     public function putSEO(Request $request) {
@@ -73,15 +60,23 @@ class ImagesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return $this->jsondata(false,true,  'upload failed', [$validator->errors()->first()], []);
+            return $this->jsondata(false, true, 'Upload failed', [$validator->errors()->first()], []);
         }
 
+        $image = Image::find($request->img_id);
+        if ($image) {
+            $image->title = $request->title;
+            $image->save();
 
-        $Image = Image::find($request->img_id);
-        $Image->title = $request->title;
-        $Image->save();
-        if ($Image) :
-            return $this->jsondata(true,true,  'Image updated successfuly', [], []);
-        endif;
+            return $this->jsondata(true, true, 'Image updated successfully', [], []);
+        }
+
+        return $this->jsondata(false, true, 'Image not found', ['Invalid image ID'], []);
+    }
+
+    protected function storePhoto($photo)
+    {
+        $path = $photo->store('photos', 'public'); // Store the photo in the 'storage/app/public/photos' directory
+        return $path;
     }
 }
