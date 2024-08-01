@@ -5,9 +5,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Image;
+use App\Traits\DataFormController;
 
 class ImagesController extends Controller
 {
+    use DataFormController;
     public function uploadeImg(Request $request) {
         $validator = Validator::make($request->all(), [
             'img' => ['required', 'image'], // Ensure the uploaded file is an image
