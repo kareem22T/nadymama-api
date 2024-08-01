@@ -22,6 +22,7 @@ class AuthUserService
     public function login($credentials)
     {
         $user = User::where("email", $credentials['email'])->first();
+        return $user;
         if ($user) {
 
             $token = $user->createToken('token')->plainTextToken;

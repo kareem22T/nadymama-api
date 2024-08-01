@@ -36,6 +36,7 @@ class AuthController extends Controller
 
     public function login(AuthUserRequest $request)
     {
+        return $this->userService->login($request->validated());
         $isLogin = $this->userService->login($request->validated())['isLogin'];
         if ($isLogin) :
             $user = $this->userService->login($request->validated())['user'];
