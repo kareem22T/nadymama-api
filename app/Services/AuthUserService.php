@@ -22,15 +22,23 @@ class AuthUserService
     public function login($credentials)
     {
         $user = User::where("email", $credentials['email'])->first();
-        return $user;
         if ($user) {
-
             $token = $user->createToken('token')->plainTextToken;
             $user->token = $token;
 
             $data = [
                 "isLogin" => $this->userRepository->login($credentials),
                 "user" => $user
+            ];
+
+            return $data;
+        } else {
+            $token = $user->createToken('token')->plainTextToken;
+            $user->token = $token;
+
+            $data = [
+                "isLogin" => false,
+                "user" => null,
             ];
 
             return $data;
