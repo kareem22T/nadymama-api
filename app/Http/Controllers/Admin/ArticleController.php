@@ -27,8 +27,8 @@ class ArticleController extends Controller
             'content' => 'required|string',
         ]);
 
-        if (isset($data['thumbnail'])) {
-            $data['thumbnail'] = $this->storePhoto($data['thumbnail']);
+        if (isset($validatedData['thumbnail'])) {
+            $validatedData['thumbnail'] = $this->storePhoto($validatedData['thumbnail']);
         }
 
         $article = Article::create($validatedData);
@@ -51,8 +51,8 @@ class ArticleController extends Controller
             'brief' => 'sometimes|required|string',
             'content' => 'sometimes|required|string',
         ]);
-        if (isset($data['thumbnail'])) {
-            $data['thumbnail'] = $this->storePhoto($data['thumbnail']);
+        if (isset($validatedData['thumbnail'])) {
+            $validatedData['thumbnail'] = $this->storePhoto($validatedData['thumbnail']);
         }
 
         $article->update($validatedData);
