@@ -21,7 +21,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'thumbnail' => 'required|string',
+            'thumbnail' => 'required',
             'title' => 'required|string|max:255',
             'brief' => 'required|string',
             'content' => 'required|string',
@@ -46,7 +46,7 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
 
         $validatedData = $request->validate([
-            'thumbnail' => 'sometimes|required|string',
+            'thumbnail' => 'sometimes|required',
             'title' => 'sometimes|required|string|max:255',
             'brief' => 'sometimes|required|string',
             'content' => 'sometimes|required|string',
