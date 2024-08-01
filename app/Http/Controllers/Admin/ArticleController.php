@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -21,14 +20,14 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'thumbnail' => 'required',
+            'thumbnail' => 'required|file|image|max:2048', // Ensure it's an image file and limit size
             'title' => 'required|string|max:255',
             'brief' => 'required|string',
             'content' => 'required|string',
         ]);
 
-        if (isset($validatedData['thumbnail'])) {
-            $validatedData['thumbnail'] = $this->storePhoto($validatedData['thumbnail']);
+        if ($request->hasFile('thumbnail')) {
+            $validatedData['thumbnail'] = $this->storePhoto($request->file('thumbnail'));
         }
 
         $article = Article::create($validatedData);
@@ -46,13 +45,18 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
 
         $validatedData = $request->validate([
-            'thumbnail' => 'sometimes|required',
+            'thumbnail' => 'sometimes|file|image|max:2048', // Ensure it's an image file and limit size
             'title' => 'sometimes|required|string|max:255',
             'brief' => 'sometimes|required|string',
             'content' => 'sometimes|required|string',
         ]);
-        if (isset($validatedData['thumbnail'])) {
-            $validatedData['thumbnail'] = $this->storePhoto($validatedData['thumbnail']);
+
+        if ($request->hasFile('thumbnail')) {
+            // Delete the old thumbnail if it exists
+            if ($article->thumbnail) {
+                Storage::disk('public')->delete($article->thumbnail);
+            }
+            $validatedData['thumbnail'] = $this->storePhoto($request->file('thumbnail'));
         }
 
         $article->update($validatedData);
@@ -62,6 +66,12 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
+
+        // Delete the associated thumbnail
+        if ($article->thumbnail) {
+            Storage::disk('public')->delete($article->thumbnail);
+        }
+
         $article->delete();
         return response()->json(null, 204);
     }
@@ -71,5 +81,4 @@ class ArticleController extends Controller
         $path = $photo->store('photos', 'public'); // stores the photo in the 'storage/app/public/photos' directory
         return $path;
     }
-
 }
