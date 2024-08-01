@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Traits\ApiResponser;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -25,6 +26,10 @@ class ArticleController extends Controller
             'brief' => 'required|string',
             'content' => 'required|string',
         ]);
+
+        if (isset($data['thumbnail'])) {
+            $data['thumbnail'] = $this->storePhoto($data['thumbnail']);
+        }
 
         $article = Article::create($validatedData);
         return $this->successResponse($article);
@@ -46,6 +51,9 @@ class ArticleController extends Controller
             'brief' => 'sometimes|required|string',
             'content' => 'sometimes|required|string',
         ]);
+        if (isset($data['thumbnail'])) {
+            $data['thumbnail'] = $this->storePhoto($data['thumbnail']);
+        }
 
         $article->update($validatedData);
         return $this->successResponse($article);
@@ -57,4 +65,11 @@ class ArticleController extends Controller
         $article->delete();
         return response()->json(null, 204);
     }
+
+    protected function storePhoto($photo)
+    {
+        $path = $photo->store('photos', 'public'); // stores the photo in the 'storage/app/public/photos' directory
+        return $path;
+    }
+
 }
