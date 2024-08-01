@@ -16,7 +16,7 @@ class ArticleController extends Controller
 
     public function article($articleId)
     {
-        $article = Article::with("phones")->find($articleId);
+        $article = Article::find($articleId);
 
         if (!$article) {
             return response()->json(['error' => 'Article not found'], 404);
