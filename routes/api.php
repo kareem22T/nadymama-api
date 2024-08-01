@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\AppointmentController;
+use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\DoctorController;
 use App\Http\Controllers\User\SpecializationController;
@@ -39,6 +40,6 @@ Route::prefix('users')->group(function () {
     Route::get('doctors', [DoctorController::class, "index"]);
 
     // get articles
-    Route::get('articles', [DoctorController::class, "index"]);
+    Route::get('articles', [ArticleController::class, "index"]);
 
 });
