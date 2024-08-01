@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Traits\ApiResponser;
 
 class ArticleController extends Controller
 {
+    use ApiResponser;
+
     public function index()
     {
         return Article::all();
@@ -23,13 +26,13 @@ class ArticleController extends Controller
         ]);
 
         $article = Article::create($validatedData);
-        return response()->json($article, 201);
+        return $this->successResponse($article);
     }
 
     public function show($id)
     {
         $article = Article::findOrFail($id);
-        return response()->json($article);
+        return $this->successResponse($article);
     }
 
     public function update(Request $request, $id)
@@ -44,7 +47,7 @@ class ArticleController extends Controller
         ]);
 
         $article->update($validatedData);
-        return response()->json($article);
+        return $this->successResponse($article);
     }
 
     public function destroy($id)
