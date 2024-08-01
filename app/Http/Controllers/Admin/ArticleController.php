@@ -13,7 +13,8 @@ class ArticleController extends Controller
 
     public function index()
     {
-        return Article::all();
+        $articles = Article::all();
+        return $this->successResponse($articles);
     }
 
     public function store(Request $request)
