@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Repositories\AuthUserRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class AuthUserService
 {
@@ -22,7 +23,8 @@ class AuthUserService
     public function login($credentials)
     {
         $user = User::where("email", $credentials['email'])->first();
-        if ($user) {
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
             $token = $user->createToken('token')->plainTextToken;
             $user->token = $token;
 
