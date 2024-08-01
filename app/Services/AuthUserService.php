@@ -35,9 +35,6 @@ class AuthUserService
 
             return $data;
         } else {
-            $token = $user->createToken('token')->plainTextToken;
-            $user->token = $token;
-
             $data = [
                 "isLogin" => false,
                 "user" => null,
