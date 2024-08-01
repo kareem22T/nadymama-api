@@ -12,7 +12,7 @@ class ImagesController extends Controller
     use DataFormController;
     public function uploadeImg(Request $request) {
         $validator = Validator::make($request->all(), [
-            'img' => ['required', 'image'], // Ensure the uploaded file is an image
+            'img' => ['required'], // Ensure the uploaded file is an image
         ], [
             'img.required' => 'Please upload a valid image',
         ]);
