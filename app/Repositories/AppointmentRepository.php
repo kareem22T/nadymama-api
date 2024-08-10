@@ -17,7 +17,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
 
     public function getAppointmentPerDoctor($request)
     {
-        return $request->user()->appointments()->get();
+        return $request->user()->appointments()->latest()->get();
     }
 
     public function getAppointmentPerUser($request)
