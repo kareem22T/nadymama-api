@@ -23,7 +23,7 @@ class StoreDoctorRequest extends FormRequest
             'username' => 'required|unique:doctors,username',
             'password' => 'required',
             'description' => 'required|string',
-            'photo' => 'nullable|image',
+            'photo' => 'nullable',
             'specialization_id' => 'required',
             'position_id' => 'required',
             'specialization' => 'nullable',

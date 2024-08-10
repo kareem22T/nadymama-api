@@ -22,7 +22,7 @@ class UpdateDoctorRequest extends FormRequest
             'name' => 'required|string|max:255',
             'username' => 'required',
             'description' => 'required|string',
-            'photo' => 'nullable|image',
+            'photo' => 'nullable',
             'specialization_id' => 'required',
             'position_id' => 'required',
             'specialization' => 'nullable',
