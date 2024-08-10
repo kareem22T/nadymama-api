@@ -39,6 +39,7 @@ class DoctorController extends Controller
 
     public function update(UpdateDoctorRequest $request, $id)
     {
+        return $request;
         $doctor = $this->doctorService->updateDoctor($id, $request->validated());
         return $this->successResponse($doctor, 'Doctor updated successfully');
     }
