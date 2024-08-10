@@ -37,8 +37,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/images/get_images', [ImagesController::class, 'getImages']);
         Route::post('/images/search', [ImagesController::class, 'search']);
 
-        // settings
-        Route::post('/settings/store', [SettingsController::class, 'store']);
     });
+    // settings
+    Route::post('/settings/store', [SettingsController::class, 'store']);
 
 });
