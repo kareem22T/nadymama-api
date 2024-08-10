@@ -14,14 +14,16 @@ class SettingsController extends Controller
     public function store(Request $request)
     {
         foreach ($request->except('_token') as $key => $value) {
-            if ($request->hasFile($key)) {
-                $path = null;
-                if (isset($value)) {
-                    $path = $this->storePhoto($value);
+            if ($value) {
+                if ($request->hasFile($key)) {
+                    $path = null;
+                    if (isset($value)) {
+                        $path = $this->storePhoto($value);
+                    }
+                    Setting::updateOrCreate(['key' => $key], ['value' => $path]);
+                } else {
+                    Setting::updateOrCreate(['key' => $key], ['value' => $value]);
                 }
-                Setting::updateOrCreate(['key' => $key], ['value' => $path]);
-            } else {
-                Setting::updateOrCreate(['key' => $key], ['value' => $value]);
             }
         }
 
