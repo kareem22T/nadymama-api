@@ -58,7 +58,7 @@ class DoctorRepository implements DoctorRepositoryInterface
         try {
             $doctor = $this->model->findOrFail($id);
 
-            if (isset($data['photo'])) {
+            if ($this->isImage($data['photo']) && isset($data['photo'])) {
                 $data['photo'] = $this->storePhoto($data['photo']);
             }
 
@@ -85,7 +85,12 @@ class DoctorRepository implements DoctorRepositoryInterface
         $path = $photo->store('photos', 'public'); // stores the photo in the 'storage/app/public/photos' directory
         return $path;
     }
-
+    private function isImage($file)
+    {
+        // Validate that the file is an image
+        $imageInfo = getimagesize($file);
+        return $imageInfo !== false;
+    }
     public function delete($id)
     {
         DB::beginTransaction();
