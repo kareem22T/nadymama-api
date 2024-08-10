@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\ImagesController;
+use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\SpecializationController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,10 @@ Route::prefix('admin')->group(function () {
 
         /* articles edpoints */
             Route::apiResource('articles', ArticleController::class);
+        ###########################################################
+
+        /* position edpoints */
+            Route::apiResource('positions', PositionController::class);
         ###########################################################
 
         // images
