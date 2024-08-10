@@ -15,6 +15,7 @@ Route::prefix('admin')->group(function () {
 
         /* doctors edpoints */
             Route::apiResource('doctors', DoctorController::class);
+            Route::update('doctors/{id}/update', [DoctorController::class, "update"]);
         ###########################################################
 
         /* doctors edpoints */
