@@ -58,7 +58,7 @@ class DoctorRepository implements DoctorRepositoryInterface
         try {
             $doctor = $this->model->findOrFail($id);
 
-            if ($this->isImage($data['photo']) && isset($data['photo'])) {
+            if (is_uploaded_file($data['photo']) && isset($data['photo'])) {
                 $data['photo'] = $this->storePhoto($data['photo']);
             }
 
