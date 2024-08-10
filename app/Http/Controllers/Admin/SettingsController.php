@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Traits\ApiResponser;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
