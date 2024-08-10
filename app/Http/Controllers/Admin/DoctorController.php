@@ -40,7 +40,7 @@ class DoctorController extends Controller
 
     public function update(Request $request, $id)
     {
-        return $request;
+        dd($request->all()); // This will dump all the input data as an array and stop the script
         $doctor = $this->doctorService->updateDoctor($id, $request->validated());
         return $this->successResponse($doctor, 'Doctor updated successfully');
     }
