@@ -12,7 +12,26 @@ class DoctorController extends Controller
 {
     public function index(Request $request)
     {
-        $doctors = Doctor::with("position")->paginate(20); // You can adjust the number per page as needed
+        // Start with the base query
+        $query = Doctor::with("position");
+
+        // Apply filters based on the query parameters
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $request->query('name') . '%');
+        }
+
+        if ($request->has('position_id')) {
+            $query->where('position_id', $request->query('position_id'));
+        }
+
+        if ($request->has('specialization_id')) {
+            $query->where('specialization_id', $request->query('specialization_id'));
+        }
+
+        // Paginate the results
+        $doctors = $query->paginate(20); // Adjust the per-page count as needed
+
+        // Return the results as JSON
         return response()->json($doctors);
     }
 
