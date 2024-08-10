@@ -10,7 +10,9 @@ class SpecializationController extends Controller
 {
     public function index()
     {
-        $specializations = Specialization::with('doctors')->get();
+        $specializations = Specialization::with(['doctors' => function($q) {
+            $q->with("psoition");
+        }])->get();
         return response()->json($specializations);
     }
 
@@ -24,7 +26,7 @@ class SpecializationController extends Controller
 
         $perPage = $request->query('per_page', 20); // Default to 10 items per page if not specified
 
-        $doctors = $specialization->doctors()->paginate($perPage);
+        $doctors = $specialization->doctors()->with("psoition")->paginate($perPage);
 
         return response()->json($doctors);
     }
