@@ -26,7 +26,7 @@ class Doctor extends Authenticatable
         return $this->belongsTo(Specialization::class);
     }
 
-    public function specialization()
+    public function position()
     {
         return $this->belongsTo(Position::class);
     }
