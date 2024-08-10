@@ -7,7 +7,6 @@ use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 use App\Services\DoctorService;
 use App\Traits\ApiResponser;
-use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -38,9 +37,8 @@ class DoctorController extends Controller
         return $this->successResponse($doctor);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateDoctorRequest $request, $id)
     {
-        dd($request->all()); // This will dump all the input data as an array and stop the script
         $doctor = $this->doctorService->updateDoctor($id, $request->validated());
         return $this->successResponse($doctor, 'Doctor updated successfully');
     }
