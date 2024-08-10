@@ -7,6 +7,7 @@ use App\Http\Requests\StoreDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
 use App\Services\DoctorService;
 use App\Traits\ApiResponser;
+use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
@@ -37,7 +38,7 @@ class DoctorController extends Controller
         return $this->successResponse($doctor);
     }
 
-    public function update(UpdateDoctorRequest $request, $id)
+    public function update(Request $request, $id)
     {
         return $request;
         $doctor = $this->doctorService->updateDoctor($id, $request->validated());
