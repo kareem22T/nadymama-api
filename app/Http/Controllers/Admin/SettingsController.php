@@ -25,7 +25,7 @@ class SettingsController extends Controller
             }
         }
 
-        return $this->successResponse(null, 'Specialization deleted successfully', 204);
+        return redirect()->back();
     }
 
     protected function storePhoto($photo)
