@@ -38,6 +38,8 @@ Route::prefix('users')->group(function () {
 
     // get doctors
     Route::get('doctors', [DoctorController::class, "index"]);
+    Route::get('doctors/categories', [DoctorController::class, "getAllCategories"]);
+    Route::get('doctors/positions', [DoctorController::class, "getAllPositions"]);
 
     // get articles
     Route::get('articles', [ArticleController::class, "index"]);
