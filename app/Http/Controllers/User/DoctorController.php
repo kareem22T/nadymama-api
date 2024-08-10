@@ -21,11 +21,11 @@ class DoctorController extends Controller
         }
 
         if ($request->has('position_id')) {
-            $query->where('position_id', $request->query('position_id'));
+            $query->where('position_id', 'like', '%' . $request->query('position_id') . '%');
         }
 
         if ($request->has('specialization_id')) {
-            $query->where('specialization_id', $request->query('specialization_id'));
+            $query->where('specialization_id', 'like', '%' . $request->query('specialization_id') . '%');
         }
 
         // Paginate the results
