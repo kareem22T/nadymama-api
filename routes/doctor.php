@@ -11,6 +11,7 @@ Route::prefix('doctor')->group(function () {
     Route::middleware(["auth:sanctum,doctor"])->group(function () {
         Route::get('appointments', [AppointmentController::class, "get"]);
         Route::post('/cancel-day-or-date', [ScheduleController::class, "create"]);
+        Route::post('/reset-password', [AuthController::class, "resetPassword"]);
     });
 
 });
