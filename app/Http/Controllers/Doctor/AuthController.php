@@ -68,7 +68,7 @@ class AuthController extends Controller
             return $this->jsondata(false, null, 'Reset password failed', [$validator->errors()->first()], []);
         }
 
-        $user = Auth::guard('doctor')->user();
+        $user = $request->user();
 
         // Check if the old password matches
         if (!Hash::check($request->old_password, $user->password)) {
