@@ -100,9 +100,11 @@ class AuthController extends Controller
                 } else {
                     $user->is_email_verified = true;
                     $user->save();
+                    $token = $user->createToken('token')->plainTextToken;
+                    $user->token = $token;
 
                     if ($user) {
-                        return $this->successResponse("تم تاكيد بريدك الالكتروني بنجاح");
+                        return $this->successResponse($user, "تم تاكيد بريدك الالكتروني بنجاح");
                     }
                 }
             }
