@@ -15,6 +15,9 @@ include(base_path('routes/doctor.php'));
 Route::prefix('users')->group(function () {
     Route::post('login', [AuthController::class, "login"]);
     Route::post('register', [AuthController::class, "register"]);
+    Route::get('/user/ask-email-verfication-code', [AuthController::class, "askEmailCode"])->middleware('auth:sanctum');
+
+    Route::post('/user/verify-email', [AuthController::class, "verifyEmail"])->middleware('auth:sanctum');
 
     Route::middleware(["auth:sanctum"])->group(function () {
 
