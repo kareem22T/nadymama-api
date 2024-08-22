@@ -16,6 +16,9 @@ Route::prefix('users')->group(function () {
     Route::post('login', [AuthController::class, "login"]);
     Route::post('register', [AuthController::class, "register"]);
     Route::get('/user/ask-email-verfication-code', [AuthController::class, "askEmailCode"])->middleware('auth:sanctum');
+    Route::post('/user/ask-for-forgot-password-email-code', [AuthController::class, "askEmailCodeForgot"]);
+    Route::post('/user/forgot-password', [AuthController::class, "forgetPassword"]);
+    Route::post('/user/forgot-password-check-code', [AuthController::class, "forgetPasswordCheckCode"]);
 
     Route::post('/user/verify-email', [AuthController::class, "verifyEmail"])->middleware('auth:sanctum');
 
