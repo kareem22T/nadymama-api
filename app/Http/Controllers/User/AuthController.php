@@ -177,16 +177,29 @@ class AuthController extends Controller
         $code = $request->code;
 
         if ($user) {
-            $user->password = Hash::make($request->password);
-            $user->save();
+            if (!Hash::check($code, $user->email_last_verfication_code ? $user->email_last_verfication_code : Hash::make(0000))) {
+                return $this->errorResponse("الرمز غير صحيح", 400);
 
-            if ($user) {
-                return $this->successResponse("", "تم تعين كلمة المرور بنجاح ");
+            } else {
+                $timezone = 'Europe/Istanbul'; // Replace with your specific timezone if different
+                $verificationTime = new Carbon($user->email_last_verfication_code_expird_at, $timezone);
+                if ($verificationTime->isPast()) {
+                    return $this->errorResponse("الرمز غير ساري", 400);
+                } else {
+                    if ($user) {
+                        $user->password = Hash::make($request->password);
+                        $user->save();
+
+                        if ($user) {
+                            return $this->successResponse("", "تم تعين كلمة المرور بنجاح ");
+                        }
+                    }
+                }
             }
-        }
-        else {
+        } else {
             return $this->errorResponse("هذا الحساب غير مسجل", 400);
         }
+
 
     }
 
