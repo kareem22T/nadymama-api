@@ -219,7 +219,7 @@ class AuthController extends Controller
                     return $this->errorResponse("الرمز غير ساري", 400);
                 } else {
                     if ($user) {
-                        return $this->errorResponse("الرمز صحيح", 400);
+                        return $this->successResponse("الرمز صحيح");
                     }
                 }
             }
