@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\User\AppointmentController;
 use App\Http\Controllers\User\ArticleController;
 use App\Http\Controllers\User\AuthController;
