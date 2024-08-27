@@ -54,5 +54,6 @@ Route::prefix('users')->group(function () {
 
     // settings
     Route::get('settings', [HomeController::class, "get"]);
+    Route::post('/messages', [MessageController::class, 'store']);
 
 });

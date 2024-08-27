@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SpecializationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 
 Route::prefix('admin')->group(function () {
     Route::post('login', [AuthController::class, "login"]);
@@ -40,5 +41,7 @@ Route::prefix('admin')->group(function () {
     });
     // settings
     Route::post('/settings/store', [SettingsController::class, 'store']);
+
+    Route::get('/messages', [MessageController::class, 'index']);
 
 });
