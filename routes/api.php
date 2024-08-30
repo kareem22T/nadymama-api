@@ -16,7 +16,7 @@ include(base_path('routes/doctor.php'));
 Route::prefix('users')->group(function () {
     Route::post('login', [AuthController::class, "login"]);
     Route::post('register', [AuthController::class, "register"]);
-    Route::get('/user/ask-email-verfication-code', [AuthController::class, "askEmailCode"])->middleware('auth:sanctum');
+    Route::get('/user/ask-email-verification-code', [AuthController::class, "askEmailCode"])->middleware('auth:sanctum');
     Route::post('/user/ask-for-forgot-password-email-code', [AuthController::class, "askEmailCodeForgot"]);
     Route::post('/user/forgot-password', [AuthController::class, "forgetPassword"]);
     Route::post('/user/forgot-password-check-code', [AuthController::class, "forgetPasswordCheckCode"]);
@@ -25,21 +25,22 @@ Route::prefix('users')->group(function () {
 
     Route::middleware(["auth:sanctum"])->group(function () {
 
-        /* users edpoints */
-            Route::get('user', [AuthController::class, "user"]);
+        /* users endpoints */
+        Route::get('user', [AuthController::class, "user"]);
         ###########################################################
 
-        /* appointments edpoints */
-            Route::prefix('appointments')->group(function () {
-                Route::post('book', [AppointmentController::class, "book"]);
-                Route::get('/', [AppointmentController::class, "get"]);
-            });
+        /* appointments endpoints */
+        Route::prefix('appointments')->group(function () {
+            Route::post('book', [AppointmentController::class, "book"]);
+            Route::get('/', [AppointmentController::class, "get"]);
+        });
         ###########################################################
 
     });
 
     // get categories
     Route::get('categories', [SpecializationController::class, "index"]);
+    Route::get('categories/all', [HomeController::class, "getAllCategories"]);
 
     Route::get('/specializations/{id}/doctors', [SpecializationController::class, 'getDoctorsBySpecialization']);
     Route::get('/doctor/{id}', [DoctorController::class, 'doctor']);
@@ -48,6 +49,10 @@ Route::prefix('users')->group(function () {
     Route::get('doctors', [DoctorController::class, "index"]);
     Route::get('doctors/categories', [DoctorController::class, "getAllCategories"]);
     Route::get('doctors/positions', [DoctorController::class, "getAllPositions"]);
+
+    // Add the new routes for paginating doctors
+    Route::get('doctors/paginate', [HomeController::class, 'paginateDoctors']);
+    Route::get('doctors/category/{categoryId}/paginate', [HomeController::class, 'paginateDoctorsByCategory']);
 
     // get articles
     Route::get('articles', [ArticleController::class, "index"]);
