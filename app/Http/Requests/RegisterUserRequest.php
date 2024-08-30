@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
@@ -24,6 +23,22 @@ class RegisterUserRequest extends FormRequest
             'phone' => 'required|unique:users,phone',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'حقل الاسم مطلوب.',
+            'name.string' => 'يجب أن يكون الاسم نصًا.',
+            'name.max' => 'الاسم يجب ألا يتجاوز 255 حرفًا.',
+            'email.required' => 'حقل البريد الإلكتروني مطلوب.',
+            'email.unique' => 'البريد الإلكتروني مُسجل بالفعل.',
+            'phone.required' => 'حقل الهاتف مطلوب.',
+            'phone.unique' => 'الهاتف مُسجل بالفعل.',
+            'password.required' => 'حقل كلمة المرور مطلوب.',
+            'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
+            'password_confirmation.required' => 'حقل تأكيد كلمة المرور مطلوب.',
         ];
     }
 
