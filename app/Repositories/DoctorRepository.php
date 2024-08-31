@@ -7,6 +7,7 @@ use App\Models\DoctorPhone;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class DoctorRepository implements DoctorRepositoryInterface
@@ -63,8 +64,11 @@ class DoctorRepository implements DoctorRepositoryInterface
             }
 
             if (isset($data['password'])) {
+                Log::info("Hashing password: " . $data['password']);  // Debug log
                 $data['password'] = Hash::make($data['password']);
             }
+
+            Log::info("Updating doctor with data: " . json_encode($data));  // Debug log
 
             $doctor->update($data);
             $doctor->phones()->delete();
@@ -76,6 +80,7 @@ class DoctorRepository implements DoctorRepositoryInterface
             return $doctor;
         } catch (Exception $e) {
             DB::rollBack();
+            Log::error("Failed to update doctor: " . $e->getMessage());  // Error log
             throw $e;
         }
     }
