@@ -28,6 +28,7 @@ class UpdateDoctorRequest extends FormRequest
             'specialization' => 'nullable',
             'degree' => 'required|string|max:255',
             'examination_price' => 'required|numeric',
+            'password' => 'nullable',
             'special_examination_price' => 'required|numeric',
             'way_of_waiting' => 'required|string|max:255',
             'phones' => 'required|array',
