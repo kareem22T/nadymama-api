@@ -63,13 +63,9 @@ class DoctorRepository implements DoctorRepositoryInterface
                 $data['photo'] = $this->storePhoto($data['photo']);
             }
 
-            Log::info("Hashing password: " . $data['password']);  // Debug log
             if (isset($data['password'])) {
-                Log::info("Hashing password: " . $data['password']);  // Debug log
                 $data['password'] = Hash::make($data['password']);
             }
-
-            Log::info("Updating doctor with data: " . json_encode($data));  // Debug log
 
             $doctor->update($data);
             $doctor->phones()->delete();
