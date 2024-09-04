@@ -19,10 +19,10 @@ trait SendEmailTrait
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_LOWLEVEL; //Enable verbose debug output
             $mail->isSMTP(); //Send using SMTP
-            $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+            $mail->Host = 'mail.nadymama.com'; //Set the SMTP server to send through
             $mail->SMTPAuth = true; //Enable SMTP authentication
-            $mail->Username = 'nadymama.med@gmail.com'; //SMTP username
-            $mail->Password = 'sifv qfgz xodx jdys'; //SMTP password
+            $mail->Username = 'mail@nadymama.com'; //SMTP username
+            $mail->Password = '01119111893NaDy!mi'; //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
             $mail->Port = 465;
             //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
