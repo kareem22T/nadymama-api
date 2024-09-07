@@ -25,6 +25,7 @@ class UpdateDoctorRequest extends FormRequest
             'photo' => 'nullable',
             'specialization_id' => 'required',
             'position_id' => 'required',
+            'gouvernorat_id' => 'required',
             'specialization' => 'nullable',
             'degree' => 'required|string|max:255',
             'examination_price' => 'required|numeric',
