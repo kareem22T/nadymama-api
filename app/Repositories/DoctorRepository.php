@@ -65,7 +65,7 @@ class DoctorRepository implements DoctorRepositoryInterface
                 $data['photo'] = $this->storePhoto($data['photo']);
             }
 
-            if (isset($data['password']) && $data['password'] !== null) {
+            if (isset($data['password']) && $data['password'] != null && Hash::make($data['password']) != null) {
                 $data['password'] = Hash::make($data['password']);
             }
 
