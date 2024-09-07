@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isEmpty;
+
 class DoctorRepository implements DoctorRepositoryInterface
 {
     protected $model;
@@ -63,7 +65,7 @@ class DoctorRepository implements DoctorRepositoryInterface
                 $data['photo'] = $this->storePhoto($data['photo']);
             }
 
-            if (isset($data['password'])) {
+            if (isset($data['password']) && !isEmpty($data['password'])) {
                 $data['password'] = Hash::make($data['password']);
             }
 
