@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\GouvernoratController;
 use App\Http\Controllers\Admin\ImagesController;
 use App\Http\Controllers\Admin\PositionController;
 use App\Http\Controllers\Admin\SettingsController;
@@ -30,6 +31,10 @@ Route::prefix('admin')->group(function () {
 
         /* position edpoints */
             Route::apiResource('positions', PositionController::class);
+        ###########################################################
+
+        /* gouvernorat edpoints */
+            Route::apiResource('gouvernorats', GouvernoratController::class);
         ###########################################################
 
         // images

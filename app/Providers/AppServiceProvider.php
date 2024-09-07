@@ -11,6 +11,8 @@ use App\Repositories\AuthUserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\DoctorRepositoryInterface;
 use App\Repositories\DoctorRepository;
+use App\Repositories\GouvernoratRepository;
+use App\Repositories\GouvernoratRepositoryInterface;
 use App\Repositories\PositionRepository;
 use App\Repositories\PositionRepositoryInterface;
 use App\Repositories\SpecializationRepository;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AuthUserRepositoryInterface::class, AuthUserRepository::class);
         $this->app->bind(AppointmentRepositoryInterface::class, AppointmentRepository::class);
         $this->app->bind(PositionRepositoryInterface::class, PositionRepository::class);
+        $this->app->bind(GouvernoratRepositoryInterface::class, GouvernoratRepository::class);
     }
 
     public function boot()

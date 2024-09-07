@@ -31,6 +31,11 @@ class Doctor extends Authenticatable
         return $this->belongsTo(Position::class);
     }
 
+    public function gouvernorat()
+    {
+        return $this->belongsTo(Gouvernorat::class);
+    }
+
     public function appointments()
     {
         return $this->hasMany(Appointment::class);

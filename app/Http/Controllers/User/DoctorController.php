@@ -28,6 +28,10 @@ class DoctorController extends Controller
             $query->where('specialization_id', 'like', '%' . $request->query('specialization_id') . '%');
         }
 
+        if ($request->has('gouvernorat_id')) {
+            $query->where('gouvernorat_id', 'like', '%' . $request->query('gouvernorat_id') . '%');
+        }
+
         // Paginate the results
         $doctors = $query->paginate(20); // Adjust the per-page count as needed
 
