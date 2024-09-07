@@ -49,6 +49,7 @@ Route::prefix('users')->group(function () {
     Route::get('doctors', [DoctorController::class, "index"]);
     Route::get('doctors/categories', [DoctorController::class, "getAllCategories"]);
     Route::get('doctors/positions', [DoctorController::class, "getAllPositions"]);
+    Route::get('doctors/gouvernorats', [DoctorController::class, "getAllGouvernorats"]);
 
     // Add the new routes for paginating doctors
     Route::get('doctors/paginate', [HomeController::class, 'paginateDoctors']);

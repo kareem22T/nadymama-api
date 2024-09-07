@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\Gouvernorat;
 use App\Models\Position;
 use App\Models\Specialization;
 use Illuminate\Http\Request;
@@ -58,6 +59,11 @@ class DoctorController extends Controller
     public function getAllPositions() {
         $positions = Position::all();
         return response()->json($positions);
+    }
+
+    public function getAllGouvernorats() {
+        $gouvernorats = Gouvernorat::all();
+        return response()->json($gouvernorats);
     }
 
 }
