@@ -67,6 +67,8 @@ class DoctorRepository implements DoctorRepositoryInterface
 
             if (isset($data['password']) && $data['password'] != null && Hash::make($data['password']) != null) {
                 $data['password'] = Hash::make($data['password']);
+            } else {
+                $data['password'] = $doctor->password;
             }
 
             $doctor->update($data);
