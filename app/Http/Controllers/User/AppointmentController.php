@@ -34,7 +34,7 @@ class AppointmentController extends Controller
     }
 
     public function getAll() {
-        $appointments = Appointment::latest()->with(['doctor', 'user'])->paginate('10');
+        $appointments = Appointment::latest()->with(['doctor', 'user'])->paginate('2');
         return $appointments;
     }
 
