@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SpecializationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\User\AppointmentController;
 
 Route::prefix('admin')->group(function () {
     Route::post('login', [AuthController::class, "login"]);
@@ -48,5 +49,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/settings/store', [SettingsController::class, 'store']);
 
     Route::get('/messages', [MessageController::class, 'index']);
+    Route::get('/appointments', [AppointmentController::class, 'getAll']);
 
 });

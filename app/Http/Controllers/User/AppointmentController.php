@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookingRequest;
+use App\Models\Appointment;
 use App\Services\AppointmentService;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -30,6 +31,11 @@ class AppointmentController extends Controller
 
         $appointment = $this->appointmentService->book($validated_data);
         return $this->successResponse($appointment);
+    }
+
+    public function getAll() {
+        $appointments = Appointment::latest()->with(['doctor', 'user'])->paginate('10');
+        return $appointments;
     }
 
 }

@@ -18,4 +18,16 @@ class Appointment extends Model
         "day"
     ];
 
+        // Define the relationship to the Doctor model
+        public function doctor()
+        {
+            return $this->belongsTo(Doctor::class);
+        }
+
+        // Define the relationship to the User model
+        public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
+
 }
